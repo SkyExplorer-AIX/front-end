@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ColorModeContext, Mode, useMode } from './theme.tsx';
+import { CssBaseline, Theme, ThemeProvider } from '@mui/material';
+import { Routes } from 'react-router-dom';
+import Topbar from './components/topbar/Topbar.tsx';
+import Sidebard from './components/sidebar/Sidebard.tsx';
+import NotFound from './pages/notfound/NotFound.tsx';
+import AuthRoute from './auth/AuthRoute.tsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [theme, colorMode] = useMode();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ColorModeContext.Provider value={colorMode as { mode: Mode, toggleColorMode: () => void }}>
+      <ThemeProvider theme={theme as Theme}>
+        <CssBaseline />
+        <div className={'app'}>
+          <Sidebard />
+          <main className={'content'}>
+            <Topbar />
+            <Routes>
+              <AuthRoute path="/" element={<Dashboard />} roles={['admin', 'user']}/>
+              <AuthRoute path="/login" element={<LoginPage />} />
+              <AuthRoute path="/unauthorized" element={<UnauthorizedPage />} />
+              <AuthRoute path="/charts" element={<EagleTable />} />
+              <AuthRoute path="/tables/dataprovider/generic" element={<GenericTable />} />
+              <AuthRoute path="/charts" element={<EagleTable />} />
+              <AuthRoute path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
 }
 
-export default App
+export default App;
