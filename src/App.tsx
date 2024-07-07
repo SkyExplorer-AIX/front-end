@@ -7,6 +7,8 @@ import NotFound from './pages/notfound/NotFound.tsx';
 import {useEffect, useState} from "react";
 import getTokenDetails from "./auth/TokenDetails.tsx";
 import Login from "./pages/login/Login.tsx";
+import Unauthorized from "./pages/unauthorized/Unauthorized.tsx";
+import Users from "./pages/users/Users.tsx";
 
 function App() {
     const navigate = useNavigate();
@@ -41,11 +43,10 @@ function App() {
                         {isAuthenticated ? <Topbar/> : null}
                         <Routes>
                             <Route path="/" element={userRole === 'admin' ? <NotFound/> : <NotFound/>}/>
+                            <Route path="/charts" element={userRole === 'admin' ? <NotFound/> : <Unauthorized/>}/>
+                            <Route path="/calendar" element={userRole === 'admin' ? <NotFound/> : <NotFound/>}/>
+                            <Route path="/users" element={userRole === 'admin' ? <Users/> : <Unauthorized/>}/>
                             <Route path="/login" element={<Login/>}/>
-                            <Route path="/unauthorized" element={<NotFound/>}/>
-                            <Route path="/charts" element={<NotFound/>}/>
-                            <Route path="/tables/dataprovider/generic" element={<NotFound/>}/>
-                            <Route path="/charts" element={<NotFound/>}/>
                             <Route path="*" element={<NotFound/>}/>
                         </Routes>
                     </main>

@@ -1,14 +1,31 @@
 import {Box, Button, TextField, Typography} from '@mui/material';
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
+
+    const navigate = useNavigate();
+    const [connectError, setConnectError] = useState<boolean>(false);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+        const response = axios.post('http://localhost:4000/v1/auth/login', {
             email: data.get('email'),
-            password: data.get('password'),
+            password: data.get('password')
+        });
+        response.then((response) => {
+            const token = response.data.token;
+            localStorage.setItem('token', token);
+            navigate('/login');
+            setConnectError(false);
+        }).catch((error) => {
+            setConnectError(true);
+            setTimeout(() => {
+                setConnectError(false);
+            }, 3000);
+            console.log(error);
         });
     }
 
@@ -42,6 +59,9 @@ function Login() {
                     <Typography variant="h3" color={"primary"} marginTop={"20px"}>
                         Connectez-vous
                     </Typography>
+                    {connectError ? <Typography variant="h6" color={"error"} marginTop={"20px"}>
+                        Erreur de connexion vérifiez vos identifiants
+                    </Typography> : null}
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"

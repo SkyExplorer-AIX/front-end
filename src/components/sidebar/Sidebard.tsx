@@ -134,8 +134,8 @@ function Sidebard() {
                   alt="cam-cgm logo"
                   width="100px"
                   height="100px"
-                  src={`../../logo.svg`}
-                  style={{ cursor: 'pointer', borderRadius: '50%' }}
+                  src={`/GroupLogo-sky_bleu.svg`}
+                  style={{ cursor: 'pointer', borderRadius: '5%' }}
                 />
               </Box>
             </Box>
