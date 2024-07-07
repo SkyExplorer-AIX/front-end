@@ -135,7 +135,7 @@ export const themeSettings = (mode: Mode) => {
             main: colors.primary[500],
           },
           secondary: {
-            main: colors.greenAccent[500],
+            main: colors.blueAccent[500],
           },
           neutral: {
             dark: colors.grey[700],
@@ -152,7 +152,7 @@ export const themeSettings = (mode: Mode) => {
             main: colors.primary[100],
           },
           secondary: {
-            main: colors.greenAccent[500],
+            main: colors.blueAccent[500],
           },
           neutral: {
             dark: colors.grey[700],
@@ -205,7 +205,7 @@ export const ColorModeContext = createContext<{
 });
 
 export const useMode = () => {
-  const [mode, setMode] = useState<Mode>("dark");
+  const [mode, setMode] = useState<Mode>("light");
 
   const colorMode = useMemo(() => ({
       mode,
