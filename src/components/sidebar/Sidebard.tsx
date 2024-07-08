@@ -71,7 +71,7 @@ function Sidebard() {
         <Box
             sx={{
                 '& .ps-sidebar-container': {
-                    height: '100vh !important',
+                    height: '100vh ',
                     background: `${colors.primary[400]} !important`,
                 },
             }}

@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 import getTokenDetails from "./auth/TokenDetails.tsx";
 import Login from "./pages/login/Login.tsx";
 import Unauthorized from "./pages/unauthorized/Unauthorized.tsx";
-import Users from "./pages/users/Users.tsx";
+import Users from "./pages/admin/users/Users.tsx";
 
 function App() {
     const navigate = useNavigate();
