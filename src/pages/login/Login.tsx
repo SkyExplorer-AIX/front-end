@@ -18,7 +18,7 @@ function Login() {
         response.then((response) => {
             const token = response.data.token;
             localStorage.setItem('token', token);
-            navigate('/login');
+            navigate('/');
             setConnectError(false);
         }).catch((error) => {
             setConnectError(true);

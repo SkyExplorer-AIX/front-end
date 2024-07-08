@@ -38,15 +38,15 @@ function App() {
             <ThemeProvider theme={theme as Theme}>
                 <CssBaseline/>
                 <div className={'app'}>
-                    {isAuthenticated ? <Sidebard/> : null}
+                    {isAuthenticated && <Sidebard/>}
                     <main className={'content'}>
-                        {isAuthenticated ? <Topbar/> : null}
+                        {isAuthenticated && <Topbar/>}
                         <Routes>
                             <Route path="/" element={userRole === 'admin' ? <NotFound/> : <NotFound/>}/>
                             <Route path="/charts" element={userRole === 'admin' ? <NotFound/> : <Unauthorized/>}/>
                             <Route path="/calendar" element={userRole === 'admin' ? <NotFound/> : <NotFound/>}/>
                             <Route path="/users" element={userRole === 'admin' ? <Users/> : <Unauthorized/>}/>
-                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/login" element={isAuthenticated ? <Unauthorized/> : <Login/>}/>
                             <Route path="*" element={<NotFound/>}/>
                         </Routes>
                     </main>
